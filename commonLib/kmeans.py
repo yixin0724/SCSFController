@@ -71,6 +71,4 @@ def doKMeansOnDataV2(inputData, kGroups, doWhiten=True, inputCentroids=None, red
     return centroids, distortion, inputData, code, dist
 
 def isItMac():
-
-
     return _platform == "darwin"

@@ -70,7 +70,6 @@ class ExperimentWorker(object):
     def do_work(self, central_db_obj, sched_db_obj, trace_id=None):
         """
             从数据库加载实验定义并运行实验。
-
         Args:
         - central_db_obj: 配置为访问分析数据库的DB对象.
         - sched_db_obj: 配置为访问实验工作者的slurm数据库的DB对象.

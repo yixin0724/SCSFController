@@ -232,7 +232,8 @@ class TestOrchestration(unittest.TestCase):
 
     def test_manifest_with_wf_create_sim_analysis(self):
         db_obj = self._db
-        # 创建ExperimentDefinition实例，配置实验参数
+        # 创建实验定义实例并配置核心参数：使用固定种子"AAAAA"，设置周期性的工作流策略（60秒周期），
+        # 指定单次跟踪类型，预定义模拟清单文件manifestsim.json，配置1小时模拟时长
         exp = ExperimentDefinition(
             seed="AAAAA",
             machine="edison",

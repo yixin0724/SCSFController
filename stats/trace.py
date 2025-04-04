@@ -21,13 +21,10 @@ class ResultTrace(object):
 
     def __init__(self, table_name="traces"):
         """初始化跟踪数据存储对象
-
         构造函数用于创建存储作业跟踪数据的实例，并初始化相关数据结构。
-
         Args:
             table_name (str, optional): 存储跟踪数据的数据库表名称。默认为 "traces"。
                 该表用于持久化作业调度过程中的状态变更记录。
-
         Attributes:
             _lists_submit (dict): 按提交时间分类存储作业对象的字典，键为时间戳
             _lists_start (dict): 按启动时间分类存储作业对象的字典，键为时间戳
@@ -97,12 +94,10 @@ class ResultTrace(object):
 
     def import_from_db(self, db_obj, table_name, start=None, end=None):
         """从数据库导入调度器模拟跟踪数据到当前对象
-
         该方法会执行以下操作：
         1. 清理目标表中与当前对象重复的数据
         2. 从指定数据库表分两次获取作业提交时间和作业开始时间的数据
         3. 将获取的数据分别存储到对象的_lists_submit和_lists_start属性
-
         Args:
             db_obj (DBManager): 数据库连接对象，需配置为连接至Slurm记账数据库
             table_name (str): 要查询的作业表名称，表结构需符合create_import_table定义的格式要求

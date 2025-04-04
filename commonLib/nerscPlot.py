@@ -53,6 +53,15 @@ def showAll():
 	gc.collect()
 	
 def saveGraph(fig, dir, graphFileName):
+    """
+    将 matplotlib 图形对象保存为 PNG 文件
+    参数:
+    fig (matplotlib.figure.Figure): 需要保存的 matplotlib 图形对象
+    dir (str): 文件保存目录路径。如果为空字符串，表示当前目录
+    graphFileName (str): 要保存的文件名（不含扩展名）。如果为空字符串则不执行保存操作
+    返回值:
+    None: 该函数没有返回值
+    """
 	if (graphFileName != ""): 
 		if (dir != ""):
 			dir += "/"
@@ -69,7 +78,21 @@ def cleanFileName(fileName):
     
 	
 def adjustXTickers(ax, ticks="", rotation="vertical", fontsize=None,):
-        
+    """
+    调整指定坐标轴对象的x轴刻度显示属性
+    Args:
+        ax: matplotlib Axes对象
+            需要被调整的坐标轴实例
+        ticks: list of float, optional, default=""
+            指定刻度位置的列表，空字符串表示不修改刻度位置
+        rotation: str/float, optional, default="vertical"
+            刻度标签旋转角度，支持字符串('vertical')或数值角度
+        fontsize: int/None, optional, default=None
+            刻度标签字体大小，None表示保持原样
+
+    Returns:
+        None: 直接修改传入的Axes对象，无返回值
+    """
     if (ticks != ""):
         print "do"
         ax.set_xticks(ticks)
@@ -145,11 +168,21 @@ def splitDic(dic, series=""):
     return series, values
 
 
-# on dataList: there is one row per series... each colum is that series value
-#       for the corresponding variabbble (Rows are series, columns variables).
+#on dataList：每个系列有一行…每一列是对应变量的序列值（行是序列，列是变量）。
 def paintVoronov(name, vor, dir="", graphFileName="", logScale=False):
-  
-    
+    """
+    绘制并保存Voronoi图
+    根据输入的Voronoi对象生成二维可视化图形，并进行图像保存操作
+    Args:
+        name (str): 图形窗口的标题名称
+        vor (scipy.spatial.Voronoi): Voronoi图计算对象
+        dir (str, optional): 图形保存目录路径，默认为当前目录
+        graphFileName (str, optional): 保存文件的名称，空字符串时使用默认命名
+        logScale (bool, optional): 是否使用对数刻度（当前实现中未使用该参数）
+
+    Returns:
+        None: 该函数没有返回值
+    """
     fig = plt.figure(name)
     setTitle(fig, name)
     adjustMargin(fig)
@@ -157,10 +190,6 @@ def paintVoronov(name, vor, dir="", graphFileName="", logScale=False):
     fig = voronoi_plot_2d(vor)
     # plt.show()
     # showAll()
-    
-    
-    
-    
     saveGraph(fig, dir, graphFileName)
 
 def paintStarGraph(name, dataList, varsNames, seriesNames, dir="", graphFileName="", logScale=False):
@@ -369,6 +398,18 @@ def paintScatter(name, x, y, dir="", graphFileName="", labelX="Series", labelY="
     saveGraph(fig, dir, graphFileName)
 
 def coWhiten(dic, queueNames):
+    """
+    对指定队列数据进行协同白化处理，消除各维度相关性并标准化
+    参数:
+        dic (dict): 输入数据字典，键为队列名称，值为对应的二维数据数组(变量按行排列)
+        queueNames (list): 需要处理的队列名称列表，用于筛选字典键值
+    返回值:
+        dict: 处理后的数据字典，结构与输入字典一致，值为白化后的数据数组
+    处理流程:
+        1. 将多个队列数据按变量维度纵向拼接
+        2. 对合并后的数据集进行白化处理
+        3. 将处理结果按原始队列拆分回各自队列
+    """
     # each row on DicList is one of the variables... they have to become a comlum.
     
     outDic = {}
@@ -571,12 +612,22 @@ def xAxisDates(ax, minXValue, maxXValue, tickFrequence):
 
 
 def calculateBins(values):
-    # The Freedman-Diaconis rule: http://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram-for-n-where-n-ranges-from-30
-    # http://comments.gmane.org/gmane.comp.python.scientific.user/19755
+    """
+    根据Freedman-Diaconis规则计算直方图的最佳箱数
+    参数:
+        values (array-like): 输入数据值列表/数组，将基于这些值计算箱数
+    返回值:
+        float: 建议的直方图分箱数量，通过数据范围除以Freedman-Diaconis公式计算的箱宽得到
+    参考:
+        Freedman-Diaconis规则文献:
+        http://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram-for-n-where-n-ranges-from-30
+        http://comments.gmane.org/gmane.comp.python.scientific.user/19755
+    """
     X = np.sort(values) 
     max = X[-1]
     min = X[0]
-    
+
+    # 计算四分位距(IQR)
     upperQuartile = scoreatpercentile(X, .75)                                                                      
     lowerQuartile = scoreatpercentile(X, .25)                                                                      
     IQR = upperQuartile - lowerQuartile
@@ -595,6 +646,28 @@ def paintHistogram(name, values, bins=0, dir="", graphFileName="", labelX="Serie
                    logScale=False, special="", fontsizeX=12, fontsizeY=13, fontsizeY2=13, \
                     normed=False, cumulative=False, cumulativePlot=True,
                     filterCut=0):
+    """
+    绘制带有可选累积分布曲线的直方图
+    参数：
+        name (str): 图表标题
+        values (array-like): 输入数据数组
+        bins (int): 直方图柱子数量，0表示自动计算（默认0）
+        dir (str): 图表保存目录（默认当前目录）
+        graphFileName (str): 保存文件名（空则不保存）
+        labelX (str): X轴标签（默认"Series"）
+        labelY (str): Y轴标签（默认"Value"）
+        logScale (bool): 是否使用对数Y轴（默认False）
+        special (str): 特殊绘图参数，用于绘制额外曲线（默认空）
+        fontsizeX (int): X轴标签字体大小（默认12）
+        fontsizeY (int): Y轴标签字体大小（默认13）
+        fontsizeY2 (int): 右侧Y轴标签字体大小（默认13）
+        normed (bool): 是否归一化为百分比（默认False）
+        cumulative (bool): 是否绘制累积直方图（默认False）
+        cumulativePlot (bool): 是否绘制累积分布曲线（默认True）
+        filterCut (float): 数据过滤阈值，0表示不过滤（默认0）
+    返回值：
+        tuple: (频数数组, 柱子边界数组, 柱子对象列表)
+    """
 # 	print exp.edges
 # 	print exp.hist
         if (bins == 0):
@@ -722,7 +795,34 @@ def paintHistogramMulti(name, valuesDic, bins=0, dir="", graphFileName="", label
                     normed=False, cumulative=False, cumulativePlot=True,
                     filterCut=0, multiFilter=None, excludeTag=None, xLogScale=False, \
                         xLim=None, onlyCumulative=False, xLogTicks=None, xLogMin=None):
-
+    """
+    绘制多组数据的直方图及累积分布图
+    参数：
+    name (str): 图表标题
+    valuesDic (dict): 数据字典，格式为{标签: 值列表}
+    bins (int): 直方图分箱数，0表示自动计算
+    dir (str): 图表保存目录
+    graphFileName (str): 图表文件名
+    labelX (str): X轴标签
+    labelY (str): Y轴标签
+    logScale (bool): 是否使用对数Y轴
+    fontsizeX (int): X轴标签字体大小
+    fontsizeY (int): Y轴标签字体大小
+    fontsizeY2 (int): 次Y轴标签字体大小
+    normed (bool): 是否标准化为百分比
+    cumulative (bool): 是否绘制累积直方图
+    cumulativePlot (bool): 是否绘制累积分布曲线
+    filterCut (int): 数值过滤阈值
+    multiFilter (float): 多组数据统一过滤阈值
+    excludeTag (str): 需要排除的标签关键字
+    xLogScale (bool): 是否使用对数X轴
+    xLim (float): X轴显示范围
+    onlyCumulative (bool): 是否仅显示累积分布
+    xLogTicks (list): 对数X轴刻度值
+    xLogMin (float): 对数X轴最小值
+    返回值：
+    tuple: (直方图计数数组, 分箱边界数组, 图形对象列表)
+    """
 
     if multiFilter != None:
         for key in valuesDic.keys():
@@ -1511,6 +1611,15 @@ def paintPlotMultiV2_axis(name, seriesDic, valuesDic, dir="", graphFileName="", 
 
 
 def isInSeriesOwnGraphs(key, list):
+    """
+    检查目标字符串是否包含列表中任意一个子字符串
+    参数:
+        key (str): 待检查的目标字符串
+        list (list[str]|None): 包含候选子字符串的列表，允许传入空值
+
+    返回值:
+        bool: 如果列表中任意一个子字符串存在于目标字符串中返回True，否则返回False
+    """
     if (list == None):
         return False
     for l in list:

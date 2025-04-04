@@ -19,8 +19,7 @@ from generate.overload import OverloadTimeController
 class ExperimentRunner(object):
     """工作器类，能够接受实验定义、生成其工作负载、运行实验并导入以存储结果。
     """
-        
-    @classmethod   
+    @classmethod
     def configure(cld,
                   trace_folder="/TBD/", #/TBD/ 是一种占位符，通常代表 "To Be Determined"（待定）
                   trace_generation_folder="/TBD/",

@@ -122,7 +122,7 @@ class TestExperiment(unittest.TestCase):
 
         # 创建一个实验工作对象，并执行工作
         ew = ExperimentWorker()
-        print "创建工作对象{0},开始执行任务".format(ew)
+        print("创建工作对象{0},开始执行任务".format(ew))
         ew.do_work(db_obj, sched_db_obj)  # 参数1是控制器数据库对象，参数2是模拟器数据库对象
 
         # 检查追踪数据是否存在（验证模拟实验是否成功生成了追踪数据）
@@ -130,7 +130,7 @@ class TestExperiment(unittest.TestCase):
 
         # 创建一个分析工作对象，并执行单个分析任务
         ew = AnalysisWorker()
-        print "创建分析对象{0},开始分析任务，并存储到数据库中。".format(ew)
+        print("创建分析对象{0},开始分析任务，并存储到数据库中。".format(ew))
         ew.do_work_single(db_obj)
 
         # # 检查分析结果是否存在（验证分析任务是否成功生成了结果数据）

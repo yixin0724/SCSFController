@@ -17,7 +17,6 @@ class TraceGenerator(object):
     """该类来生成模拟器跟踪的所有元素。
         Qos和用户列表是根据提交作业中检测到的用户和Qos生成的。
     """
-    
     def __init__(self):
         """
         初始化作业调度系统的核心统计组件

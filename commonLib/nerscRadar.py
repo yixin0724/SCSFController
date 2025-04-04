@@ -41,6 +41,14 @@ def getPerimeterData(points, center):
         
 
 def calculateDistance(dataMatrix):
+    """
+    计算数据矩阵中每两行之间在各特征维度上的绝对距离
+    参数：
+        dataMatrix (numpy.ndarray): 二维数据矩阵，形状为 (行数, 列数)，每行代表一个样本，每列代表一个特征
+    返回值：
+        numpy.ndarray: 三维距离数组，形状为 (行数, 行数, 列数)。outArray[i1, i2, j] 表示
+                       第i1行与第i2行样本在第j个特征维度上的绝对差值
+    """
     colCount=dataMatrix.shape[1]
     rowCount=dataMatrix.shape[0]
     outArray=np.zeros((rowCount, rowCount, colCount),dtype=float)
@@ -63,6 +71,13 @@ def areInBounds(dataMatrix, bound):
     return outArray
 
 def makeGroups(dataMatrix):
+    """
+    根据邻接矩阵生成连通分组，将直接或间接相连的节点合并到同一组
+    参数:
+        dataMatrix (numpy.ndarray): 邻接矩阵，二维数组，dataMatrix[i,j]=1表示节点i和j直接相连
+    返回值:
+        list[list[int]]: 分组结果列表，每个子列表包含同一连通分量的节点索引
+    """
     groups=[]
     rowCount=dataMatrix.shape[0]
     touched=np.zeros(rowCount)
@@ -657,6 +672,17 @@ def getClusters(centroids, points, association):
         
 
 def calculateCVForClusters(centroids, points, association):
+    """
+    计算各聚类簇的均值、标准差和变异系数(CV)
+    参数:
+        centroids: 聚类中心点集合，形状通常为(n_clusters, n_features)
+        points: 样本点集合，形状通常为(n_samples, n_features)
+        association: 样本点归属簇的索引列表，形状为(n_samples,)
+    返回值:
+        means: 各簇样本特征的均值列表，每个元素对应一个簇的均值
+        stdDevs: 各簇样本特征的标准差列表，每个元素对应一个簇的标准差
+        CVs: 各簇样本特征的变异系数列表，计算方式为(标准差/均值)
+    """
     clusters=getClusters(centroids, points, association)
     means=[]
     stdDevs=[]

@@ -94,17 +94,13 @@ class ProbabilityMap(object):
 
     def save(self, file_route):
         """将容器对象序列化并保存到指定文件路径。
-
         使用pickle模块将内部_container对象序列化为二进制格式，并写入指定路径文件。
         该方法使用显式文件句柄操作，写入完成后会确保关闭文件资源。
-
         Args:
             file_route (str): 要保存的目标文件路径，需包含文件名及扩展名（如：'data/container.pkl'）
-
         Raises:
             IOError: 当文件路径无效或不可写时抛出
             pickle.PicklingError: 当对象序列化失败时抛出
-
         Returns:
             None: 该方法没有返回值
         """

@@ -28,41 +28,66 @@ class TaskRecord:
 #    created
 #    refund
 #    tasks_per_node
+
+# 全局变量:
+#   userNames (dict): 用户名字典，用于存储或映射用户信息（当前为空）
+#   fieldNames (list): 目标字段名称列表，定义最终输出的字段结构
+#   subfieldIndexes (list): 原始数据字段索引列表，对应fieldNames的数据来源字段名
+#   timeStampFields (list): 时间戳类型字段列表，这些字段需要特殊时间格式处理
+#   numericFields (list): 数值类型字段列表，需要转换为数值类型
+#   simpleTextFields (list): 直接文本映射的目标字段列表
+#   simpleTextIndexes (list): 简单文本字段在原始数据中的对应字段名
+#   simpleTextIndexesMoab (list): Moab系统中简单文本字段的索引位置列表
+#   simpleNumericFields (list): 直接数值映射的目标字段列表
+#   simpleNumericIndexes (list): 数值字段在原始数据中的对应字段名
+#   simpleNumericIndexesMoab (list): Moab系统中数值字段的索引位置列表
+#   simpleNumericFieldsMoab (list): Moab系统中数值字段的目标字段名
+#   specialFields (list): 需要特殊处理逻辑的字段列表
+#   timeCountFields (list): 时间计量字段列表（最终输出用）
+#   timeCountIndexes (list): 时间计量字段在原始数据中的对应字段名
+#   memFields (list): 内存相关字段列表（最终输出用）
+#   memIndexes (list): 内存相关字段在原始数据中的对应字段名
+#   emptyFields (list): 保留但当前无数据源的字段列表
+#   carverNodeField (str): Carver系统特有的节点字段名
+#   valuesDic (dict): 数据存储字典，用于存放处理后的字段数据（当前为空）
     
     userNames={}
+
+    # 定义最终输出的字段结构（约27个标准字段）
     fieldNames=["stepid","jobname","owner","account","jobtype","cores_per_node", \
         "numnodes","class","status","dispatch","start","completion","queued", \
         "wallclock","mpp_secs","wait_secs","raw_secs","superclass", \
         "wallclock_requested","hostname","memory","created","refund", \
         "tasks_per_node", "vmemory", "filtered", "classG"]
     
-
+    # PBS系统原始字段名列表，与fieldNames顺序对应
     subfieldIndexes=["jobname","owner","account","jobtype","Resource_List.mppnppn", \
         "Resource_List.mppnodect","queue","Exit_status","etime","start","end","qtime", \
         "resources_used.walltime", \
         "Resource_List.walltime","resources_used.mem","ctime", \
         "resources_used.vmem"]
-    
+
+# 需要转换为时间戳的字段列表
     timeStampFields=["start","completion","queued","dispatch" \
         "created","refund"]
-    
+
+# 需要转换为数值类型的字段列表
     numericFields=["cores_per_node", \
         "numnodes",\
         "wallclock","mpp_secs","wait_secs","raw_secs", \
         "wallclock_requested", "memory", \
         "tasks_per_node", "refund"]
 
+    # 直接w文本映射配置
     simpleTextFields=["jobname","owner","account","class", "status"]
     simpleTextIndexes=["jobname", "owner", "account", "queue", "Exit_status"]
-    
     simpleTextIndexesMoab=[29,7,29,11, 51]
 
+    # 直接数值映射配置
     simpleNumericFields=["cores_per_node", \
         "numnodes", "dispatch","start","completion","queued","created"]
-    
     simpleNumericIndexes=["Resource_List.mppnppn", "Resource_List.mppnodect", \
                           "etime", "start", "end", "qtime", "ctime"]
-    
     simpleNumericIndexesMoab=[\
         24, 13,14,15,12,12,9]
     
@@ -83,7 +108,7 @@ class TaskRecord:
     carverNodeField="Resource_List.nodes"
     
     valuesDic={}
-    def __init():
+    def __init(self):
         self.valuesDic={}
     
     def getUser(self, curated=False):
@@ -398,6 +423,22 @@ class TaskRecord:
 
     def toSimulatorFormat(self, jobCount, baseTaskNumber, currentTime, \
             timeTransport=None, spoolDir="/opt/moab/spool/", jobNameBase="MoabS.", timeRatio=1, idleJob=False):
+        """
+        将作业数据转换为模拟器所需的格式字符串
+        参数:
+        jobCount (int): 作业计数器，用于生成唯一作业名
+        baseTaskNumber (int): 任务编号的起始基准值
+        currentTime (int): 当前时间戳，用于时间计算
+        timeTransport (int, optional): 传输时间偏移量，若存在则用于计算时间偏移
+        spoolDir (str): 作业执行目录的存储路径
+        jobNameBase (str): 作业名称的基础前缀
+        timeRatio (int): 时间缩放比例因子
+        idleJob (bool): 标识是否生成空闲作业格式
+
+        返回值:
+        tuple: 包含格式字符串和任务数的元组 (格式字符串, 任务数)
+               格式字符串为空表示无效作业，任务数为实际生成的任务数量
+        """
         offset=0
         if (timeTransport!=None):
             offset=timeTransport-currentTime

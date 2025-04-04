@@ -432,9 +432,22 @@ class WorkloadGenerator(object):
                                         no_random=no_random)
     
     def _get_random_in_list(self, value_list,
-                            no_random=False): 
+                            no_random=False):
+        """
+        从给定列表中随机选择一个元素返回
+        Args:
+            value_list (list): 候选值列表，至少包含一个元素
+            no_random (bool): 是否禁用随机选择。当为True时直接返回第一个元素，
+                默认为False
+        Returns:
+            any: 从value_list中选中的值。当列表长度为1或no_random=True时返回第一个元素，
+                否则返回随机位置对应的元素
+        """
+
+        # 如果只有一个候选值或禁用随机，直接返回首元素
         if len(value_list)==1 or no_random:
             return value_list[0]
+        # 否则生成随机索引并返回对应元素
         pos=self._random_gen.randint(0, len(value_list)-1)
         return value_list[pos]
     

@@ -548,7 +548,6 @@ class ExperimentDefinition(object):
             new_state (str): 要转换的目标状态
             check_pending (bool, 可选): 是否验证子轨迹状态，默认关闭
             subtraces_state (str, 可选): 当check_pending启用时要求的子轨迹状态
-
         返回:
             bool: 如果查询状态仍有未处理实验返回True，否则返回False
         实现特性:
