@@ -1,0 +1,2 @@
+/bin/data文件夹存放的是工作负载的模型(gen文件)，也就是实验所需的数据集
+bin/model_system_workload.py是一个对工作负载建模的示例，主要用load方法从数据库获取数据集并进行建模
