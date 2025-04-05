@@ -4,6 +4,7 @@
 
 用法:
 python plot_exp_slowdown.py (first_exp_id) (no_slowdown_exp_id)
+注意工作流提交周期要设为60
 
 Args:
 - first_exp_id: 该系列中第一个实验的数字id。
@@ -54,9 +55,9 @@ no_wf_slowdown_id=int(sys.argv[1])
 last_id=first_id+27
 time_keys={60:"60/h", 600:"6/h", 1800:"2/h", 3600:"1/h"}    # 工作流提交频率映射
 algo_keys={"manifest":"wfware", "single":"single", "multi":"dep"}   # 调度算法映射
-workflow_keys={"floodplain.json":"floodP", "synthLongWide.json":"longWide",
-               "synthWideLong.json":"wideLong"} # 工作流类型映射
-edge_keys= {0: "[0,48] core.h", 48*3600:"(48, 960] core.h", 
+# workflow_keys={"floodplain.json":"floodP", "synthLongWide.json":"longWide","synthWideLong.json":"wideLong"} # 工作流类型映射
+workflow_keys={"cybershake.json":"cybershake"} # 工作流类型映射
+edge_keys= {0: "[0,48] core.h", 48*3600:"(48, 960] core.h",
             960*3600:"(960, inf.) core.h"}  # 核心使用量区间映射
 
 

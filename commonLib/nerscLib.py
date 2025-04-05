@@ -120,7 +120,7 @@ def dumpRecordsMoab(taskRecords, fileRoute, reassignClusters=False, hostname=Non
 def getDBInfo(forceLocal=False):
     hostname=socket.gethostname()
     user = os.getenv("NERSCDB_USER", "root")
-    password = os.getenv("NERSCDB_PASS", "")
+    password = os.getenv("NERSCDB_PASS", "1234")
     
     if forceLocal:
         return "localhost", user, password, "3306"
@@ -148,7 +148,7 @@ def getEpoch(year, month=1, day=1):
     epoch = int(time.mktime(time.strptime(date_time, pattern)))
     return epoch
 
-def getDB(host="localhost", dbName="nerc", userName="nersc", password="nersc", \
+def getDB(host="localhost", dbName="scsf", userName="root", password="1234", \
           port="3306", useTunnel=False):
     print dbName, port
     d= DB(host, dbName, userName, password, port=port, useTunnel=useTunnel)
@@ -156,7 +156,7 @@ def getDB(host="localhost", dbName="nerc", userName="nersc", password="nersc", \
     return d
 
 # Functions around the summary table    
-def parseFromSQL(dbName="nersc", hostname="", userName="nersc", password="nersc", dbHost="localhost", dbPort="3306", year=-1, month=-1, day=-1, \
+def parseFromSQL(dbName="scsf", hostname="", userName="root", password="1234", dbHost="localhost", dbPort="3306", year=-1, month=-1, day=-1, \
                  endYear=-1, endMonth=-1, endDay=-1, timeAdjust=0, orderingField=None, filtered=False):
     """
     从SQL数据库获取并解析任务记录

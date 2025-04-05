@@ -58,7 +58,7 @@ def get_jobs_data_trace(file_name, list_trace_location="./list_trace"):
 
 
 def get_jobs_data(hostname, startYear, startMonth, startDay, stopYear,
-                  stopMonth, stopDay, dbName="custom2", forceLocal=False):
+                  stopMonth, stopDay, dbName="scsf", forceLocal=True):
     """
    从MySQL数据库检索PBS日志数据信息，并返回一组作业属性列表。
    不同列表中的相同职位与同一工作相关联。

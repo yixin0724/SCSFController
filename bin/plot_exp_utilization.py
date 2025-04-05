@@ -2,7 +2,7 @@
 该脚本分析利用演变和在跟踪中提交的工作。
 后者表示为：对于时间t，需要多少生产的核心小时能力来处理提交的核心小时。
 
-输出是两个PNG文件，其中包含利用率和工作效率的变化：
+输出是四个PNG文件，其中包含利用率和工作效率的变化：
 - 作为线形图: "PL-Utilization-[trace_id]-[trace_name_ob_db].png"
 - 作为散点图: "SC-Utilization-[trace_id]-[trace_name_ob_db].png"
 

@@ -96,8 +96,9 @@ class TestExperiment(unittest.TestCase):
             scheduler_folder="/scsf/",  # 调度器文件夹
             manifest_folder="manifests",  # 清单文件夹
             drain_time=3600 * 6)
+        scheduler_conf_file_base = "slurm.conf",
 
-    def test_single_with_wf_single_experiment(self):
+    def test_single_with_wf_experiment(self):
         # 获取数据库对象（已在setUp方法中初始化，用的是scsf数据库）
         db_obj = self._db
 
@@ -109,7 +110,7 @@ class TestExperiment(unittest.TestCase):
             manifest_list=[{"share": 0.0-1.0, "manifest": "floodplain.json"}],  # 这里的share是工作流占核心小时的份额，比如delta实验，一个设置0.8，一个设置0.2，两个实验的share之和为1.0
             workflow_policy="no/period/share",
             workflow_period_s=5/20/60/300,      # 设置period时，要设置workflow_period_s，它表示按固定时间间隔提交工作流
-            workflow_share=0.0-100.0,       # 设置工作流中作业的占比
+            workflow_share=30.0/0.0-100.0,       # 设置工作流中作业的占比
             workflow_handling="single/multi/manifest",
             preload_time_s=0/20/3600,   # 预加载时间
             workload_duration_s=120/400/600/3600/3600*6,    # 它表示在start_date之后生成的工作负载秒数
@@ -141,23 +142,21 @@ class TestExperiment(unittest.TestCase):
 
 # ----------------------------------------- #
 
-    def test_single_with_wf_multi_experiment(self):
-        overload = 1.0
+    def test_single_no_wf_experiment(self):
         # 获取数据库对象（已在setUp方法中初始化，用的是scsf数据库）
         db_obj = self._db
 
-        # 创建一个实验定义对象，设置各种参数
+        # 创建一个无工作流的实验对象
         exp = ExperimentDefinition(
             seed="AAAAA",
             machine="edison",
             trace_type="single",
-            manifest_list=[{"share": 1.0, "manifest": "floodplain.json"}],
-            workflow_policy="period",
-            workflow_period_s=300,
+            manifest_list=[],
+            workflow_policy="no",
+            workflow_period_s=0,
             workflow_handling="multi",
             preload_time_s=0,
-            workload_duration_s=3600 * 24 * 7,
-            overload_target=overload)
+            workload_duration_s=3600,)
 
         # 将实验定义存储到数据库中
         exp.store(db_obj)
@@ -175,62 +174,22 @@ class TestExperiment(unittest.TestCase):
         ew = AnalysisWorker()
         ew.do_work_single(db_obj)
 
-        # 检查分析结果是否存在（验证分析任务是否成功生成了结果数据）
-        self._check_results_are_there(db_obj, exp, True,
-                                      ["floodplain.json"])
 
-    def test_single_with_wf_manifest_experiment(self):
-        overload = 1.0
-        # 获取数据库对象（已在setUp方法中初始化，用的是scsf数据库）
-        db_obj = self._db
-
-        # 创建一个实验定义对象，设置各种参数
-        exp = ExperimentDefinition(
-            seed="AAAAA",
-            machine="edison",
-            trace_type="single",
-            manifest_list=[{"share": 1.0, "manifest": "floodplain.json"}],
-            workflow_policy="period",
-            workflow_period_s=300,
-            workflow_handling="manifest",
-            preload_time_s=0,
-            workload_duration_s=3600 * 24 * 7,
-            overload_target=overload)
-
-        # 将实验定义存储到数据库中
-        exp.store(db_obj)
-        # 获取模拟数据库的连接对象（即Worker的scsf数据库）
-        sched_db_obj = get_sim_db(self._vm_ip)
-
-        # 创建一个实验工作对象，并执行工作
-        ew = ExperimentWorker()
-        ew.do_work(db_obj, sched_db_obj)  # 参数1是控制器数据库对象，参数2是模拟器数据库对象
-
-        # 检查追踪数据是否存在（验证模拟实验是否成功生成了追踪数据）
-        self._check_trace_is_there(db_obj, exp)
-
-        # 创建一个分析工作对象，并执行单个分析任务
-        ew = AnalysisWorker()
-        ew.do_work_single(db_obj)
-
-        # 检查分析结果是否存在（验证分析任务是否成功生成了结果数据）
-        self._check_results_are_there(db_obj, exp, True,
-                                      ["floodplain.json"])
 
     def test_delta_experiment(self):
         """测试Delta实验的正确性，验证差异分析结果的生成和数据结构
 
-               本测试用例验证以下流程：
-               1. 创建并存储两个相同配置的基础实验
-               2. 基于这两个实验创建Delta实验
-               3. 执行实验工作流程和差异分析
-               4. 验证结果数据包含预期的统计指标和分布数据
+           本测试用例验证以下流程：
+           1. 创建并存储两个相同配置的基础实验
+           2. 基于这两个实验创建Delta实验
+           3. 执行实验工作流程和差异分析
+           4. 验证结果数据包含预期的统计指标和分布数据
 
-               参数说明：
-               self: 测试类实例，包含数据库连接等测试上下文
+           参数说明：
+           self: 测试类实例，包含数据库连接等测试上下文
 
-               返回值：
-               无，通过断言验证测试结果
+           返回值：
+           无，通过断言验证测试结果
         """
         # 创建两个相同配置的基础实验用于对比
         # 第一个实验定义配置

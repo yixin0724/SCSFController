@@ -432,10 +432,8 @@ class ExperimentDefinition(object):
 
     def load(self, db_obj, trace_id):
         """根据trace_id从数据库加载实验配置数据到当前对象
-
         通过指定的数据库连接对象查询指定trace_id对应的实验配置，将查询结果
         设置到当前对象的对应属性中。包含数据有效性检查和数据格式转换。
-
         Args:
             db_obj (DBManager): 已配置的数据库管理器对象，用于执行数据库查询操作
                 - 需要实现getValuesDicList方法

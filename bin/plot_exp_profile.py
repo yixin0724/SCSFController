@@ -11,6 +11,7 @@ Args:
 - name: 实验的名称，附加到输出文件中。如果没有设置，则使用数据库名称。
 
 Output:
+- 输出waittime、turnaround、slowdown、runtime、requested_wc、cpus_alloc等指标的cdf图
 - 绘图PNG文件存放在“./out”文件夹中。
 
 Env vars:
