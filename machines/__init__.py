@@ -35,16 +35,13 @@ class Machine(object):
     def load_from_db(self, start, stop, local=False, dbName="custom2"):
         """
         从数据库加载作业日志数据，分析并生成各类作业特征的随机变量生成器。
-
         该方法通过数据库连接获取指定时间范围内的作业调度数据，随后基于不同维度的作业特征
         （到达间隔、核心数需求等）构建对应的概率分布生成器，用于仿真建模。
-
         Args:
             start (float): epoch时间戳，表示数据检索的起始时间
             stop (float): epoch时间戳，表示数据检索的结束时间
             local (bool): 数据库连接模式，True表示直连本地MySQL，False表示通过本地5050端口的远程隧道连接
             dbName (str): 目标数据库名称，默认为"custom2"
-
         Returns:
             None: 该方法直接更新实例的_generators字典，无返回值
         """

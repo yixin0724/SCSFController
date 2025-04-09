@@ -104,11 +104,9 @@ class TimeController(object):
 class WorkloadGenerator(object):
     """
     WorkloadGenerator（工作负载生成器）生成作业轨迹，以便在调度器模拟器中运行，针对具有特定工作负载特征、用户、系统和队列配置的系统。
-    
     WorkloadGenerator 使用机器配置（Machine 类）和轨迹生成器（TraceGenerator 类）来计算作业数量，并将其以轨迹格式导出。
     机器配置描述了作业的随机变量，包括到达间隔时间、预估的挂钟时间、预估的挂钟时间准确性以及分配的核数。
     轨迹生成器负责将作业信息转换为模拟器接受的特定格式。
-    
     生成器还需要其他由 Slurm 批处理系统所需的额外信息：系统中的用户名、QOS 策略名称、现有的分区名称和账户名称。
     作业的用户、QOS、分区和账户是从这些列表中随机（均匀）选择的。
     若要更改此行为，请重新定义 _get_user、_get_partition、_get_account 和 _get_qos 方法。

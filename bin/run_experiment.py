@@ -92,7 +92,7 @@ class TestExperiment(unittest.TestCase):
             run_hostname=self._vm_ip,  # 运行的主机名
             run_user=None,  # 运行的用户
             scheduler_conf_dir="/scsf/slurm_conf",  # 调度器配置文件夹
-            local_conf_dir="configs/",  # 本地控制器配置文件夹
+            local_conf_dir="configs/",  # 本地控制器配置文件夹，orchestration下的running的_configure_slurm函数是底层实现
             scheduler_folder="/scsf/",  # 调度器文件夹
             manifest_folder="manifests",  # 清单文件夹
             drain_time=3600 * 6)
@@ -113,7 +113,7 @@ class TestExperiment(unittest.TestCase):
             workflow_share=30.0/0.0-100.0,       # 设置工作流中作业的占比
             workflow_handling="single/multi/manifest",
             preload_time_s=0/20/3600,   # 预加载时间
-            workload_duration_s=120/400/600/3600/3600*6,    # 它表示在start_date之后生成的工作负载秒数
+            workload_duration_s=120/400/600/3600/3600*6,    # 定义工作流的持续时间
             overload_target=1.0/1.1/1.2/2.0)            # 如果设置为> 1.0，则在预加载期间生成的工作负载将产生额外的作业，
 
         # 将实验定义存储到数据库中
