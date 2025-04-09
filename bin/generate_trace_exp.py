@@ -26,13 +26,13 @@ else:
     exit()
 # 配置ExperimentRunner，设置实验所需的文件夹路径和其他配置
 ExperimentRunner.configure(
-           trace_folder="/home/gonzalo/cscs14038bscVIII",
+           trace_folder="/tmp",
            trace_generation_folder="tmp", 
            local=False,
            run_user=None,
-           scheduler_conf_dir="/home/gonzalo/cscs14038bscVIII/slurm_conf",
+           scheduler_conf_dir="/scsf/slurm_conf",
            local_conf_dir="configs/",
-           scheduler_folder="/home/gonzalo/cscs14038bscVIII",
+           scheduler_folder="/scsf/",
            manifest_folder="manifests")
 
 # 获取中央数据库对象

@@ -1,7 +1,5 @@
 
-""" This script creates an experiment set that runs for three hours: one
-of pre-load, and two of actual trace. It does not include workflows, 
-and uses the fake model Edison (not actual Edison system).
+""" 此脚本创建一个运行时长为三小时的实验：其中一小时为预加载阶段，两小时为实际追踪阶段。该实验涉及工作流，且使用仿真的Edison模型（而非实际的Edison系统）。
 
 Env vars:
 - ANALYSIS_DB_HOST: hostname of the system hosting the database.

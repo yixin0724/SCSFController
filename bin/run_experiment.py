@@ -38,7 +38,7 @@ class TestExperiment(unittest.TestCase):
         trace_type参数：有三个值。
             “single”：单个实验是对工作负载进行分析的一次运行。
             “delta”：增量是两个单一轨迹（列在子轨迹中）中工作流的比较，
-            “group”：而组实验汇总了许多单个实验的结果（列在子轨迹中）。
+            “group”：而组实验汇总了许多单个实验的结果（列在子轨迹中）。实验条件相同但随机种子不同的单次试验可视为同一试验的重复。为了对它们进行综合分析，在此基础上创建了一个group实验。
         manifest_list参数：任务清单列表。每个字典有两个键：“manifest”，其值列出工作流类型的清单文件的名称；
             并且“共享”一个0-1的值，该值指示对应的工作流在工作负载中占比的核心小时。
         workflow_policy参数：控制如何处理要添加到工作负载中的工作流。
@@ -66,13 +66,6 @@ class TestExperiment(unittest.TestCase):
             do_mean_utilizatin：计算分组实验的平均利用率指标
             do_work_grouped_second_pass：对组实验结果的进一步分析
     """
-    """
-        实验设计
-            以单型实验进行下面几个实验：
-                带工作流用single提交方式以试点作业提交(可以使用不同的工作流)
-                带工作流用multi提交方式以链式作业提交
-                带工作流用manifest提交方式以Woas作业提交
-    """
 
     def setUp(self):  # 每个测试方法执行前都会执行这个进行初始化，self参数是这个类实例化的第一个对象
         # 初始化数据库连接，使用环境变量来配置数据库的主机、名称、用户和密码
@@ -95,8 +88,7 @@ class TestExperiment(unittest.TestCase):
             local_conf_dir="configs/",  # 本地控制器配置文件夹，orchestration下的running的_configure_slurm函数是底层实现
             scheduler_folder="/scsf/",  # 调度器文件夹
             manifest_folder="manifests",  # 清单文件夹
-            drain_time=3600 * 6)
-        scheduler_conf_file_base = "slurm.conf",
+            drain_time=1800)    # drain_time表示模拟结束后的缓冲时间，确保所有任务（如数据持久化、资源释放）在终止前完成，避免数据丢失或系统不稳定。
 
     def test_single_with_wf_experiment(self):
         # 获取数据库对象（已在setUp方法中初始化，用的是scsf数据库）
@@ -112,9 +104,9 @@ class TestExperiment(unittest.TestCase):
             workflow_period_s=5/20/60/300,      # 设置period时，要设置workflow_period_s，它表示按固定时间间隔提交工作流
             workflow_share=30.0/0.0-100.0,       # 设置工作流中作业的占比
             workflow_handling="single/multi/manifest",
-            preload_time_s=0/20/3600,   # 预加载时间
+            preload_time_s=0/20/3600,   # 预加载时间，包含在了工作流持续时间里面。有工作流时可以设置为0
             workload_duration_s=120/400/600/3600/3600*6,    # 定义工作流的持续时间
-            overload_target=1.0/1.1/1.2/2.0)            # 如果设置为> 1.0，则在预加载期间生成的工作负载将产生额外的作业，
+            overload_target=1.0/1.1/1.2/2.0)            # 如果设置为> 1.0，则在预加载期间生成的工作负载将产生额外的作业，有工作流时可以设置为1.0
 
         # 将实验定义存储到数据库中
         exp.store(db_obj)
