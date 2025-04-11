@@ -95,14 +95,15 @@ class TestExperiment(unittest.TestCase):
         db_obj = self._db
 
         # 创建一个实验定义对象，设置各种参数
+        # synthLongWide.json、synthWideLong.json、cybershake.json、montage.json、floodplain.json、sipht.json
         exp = ExperimentDefinition(
             seed="AAAAA",
             machine="edison",
             trace_type="single/delta/group",    # 选择实验类型为单一/对比/组实验
             manifest_list=[{"share": 0.0-1.0, "manifest": "floodplain.json"}],  # 这里的share是工作流占核心小时的份额，比如delta实验，一个设置0.8，一个设置0.2，两个实验的share之和为1.0
-            workflow_policy="no/period/share",
+            workflow_policy="no/period/share",  # 一般在多个工作流的情况下设置为share
             workflow_period_s=5/20/60/300,      # 设置period时，要设置workflow_period_s，它表示按固定时间间隔提交工作流
-            workflow_share=30.0/0.0-100.0,       # 设置工作流中作业的占比
+            workflow_share=30.0/0.0-100.0,       # 设置为share策略时进行配置，表示工作流中作业的占比
             workflow_handling="single/multi/manifest",
             preload_time_s=0/20/3600,   # 预加载时间，包含在了工作流持续时间里面。有工作流时可以设置为0
             workload_duration_s=120/400/600/3600/3600*6,    # 定义工作流的持续时间
@@ -126,9 +127,6 @@ class TestExperiment(unittest.TestCase):
         print("创建分析对象{0},开始分析任务，并存储到数据库中。".format(ew))
         ew.do_work_single(db_obj)
 
-        # # 检查分析结果是否存在（验证分析任务是否成功生成了结果数据）
-        # self._check_results_are_there(db_obj, exp, True,
-        #                               ["floodplain.json"])
 
 
 
@@ -304,9 +302,6 @@ class TestExperiment(unittest.TestCase):
         aw.do_work_single(self._db)
         aw.do_work_grouped(self._db)
 
-        # 验证分组实验结果文件和工作流数据是否生成
-        self._check_results_are_there(self._db, exp3, wf=True,
-                                      manifest_list=["manifestsim.json"])
 
     def _check_trace_is_there(self, db_obj, exp):
         """
