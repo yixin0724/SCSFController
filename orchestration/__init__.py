@@ -15,7 +15,7 @@ import os
 """ orchestration 文件夹通常用于存放与工作流编排、任务调度和协调相关的代码 """
 
 
-def get_central_db(dbName="workload"):
+def get_central_db(dbName="scsf"):
     """获取配置好的中心数据库连接对象
     通过环境变量配置数据库连接参数创建DB实例，环境变量未设置时使用默认值配置。
     环境变量优先级高于参数默认值。

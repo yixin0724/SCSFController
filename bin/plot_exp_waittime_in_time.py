@@ -1,13 +1,11 @@
 """
 在trace_id传递的参数中计算每分钟等待时间的中位数。
 
-它产生了四个图：
-    -两个图表（对数和线性比例），显示在任何给定时刻等待的作业数量。
-    -在任何给定时刻提交的作业的等待时间中值的两个图（对数和线性比例）。
-在当前的wait_time目录下
-    
-Usage:
+在当前的wait_time目录下产生了四个图：
+    - 生成当前等待作业数的线性/对数比例图。
+    - 生成提交作业等待时间中值的线性/对数比例图。
 
+Usage:
 python ./plot_exp_waittime_in_time.py (trace_id) [pbs_hostname pbs_db_name start stop] 
 
 Args:
@@ -38,6 +36,15 @@ from orchestration.definition import ExperimentDefinition
 from stats.trace import ResultTrace
 
 
+"""
+该脚本分析作业等待时间分布并生成可视化图表，主要功能包括：
+1. 从数据库加载作业跟踪数据
+2. 计算每分钟作业等待时间中位数
+3. 生成四类可视化图表：
+   - 当前等待作业数的线性/对数比例图
+   - 提交作业等待时间中值的线性/对数比例图
+"""
+
 db_obj = get_central_db()
 
 if len(sys.argv)<2:
@@ -61,11 +68,13 @@ dest_dir="./wait_time"
 if not(os.path.exists(dest_dir)):
     os.makedirs(dest_dir)
 
+#数据加载
 exp = ExperimentDefinition()
 rt = ResultTrace()
 if not do_pbs:
     exp.load(db_obj, trace_id)
     rt.load_trace(db_obj, trace_id)
+# PBS数据库特殊处理
 else:
     db_obj.dbName=pbs_db_name
     exp._machine="edison"
@@ -73,12 +82,27 @@ else:
     rt.import_from_pbs_db(db_obj, "summary", start=start_date, end=end_date, 
                           machine=pbs_hostname)
 
+def extract_workflow(field):
+    """
+    从实验名字中获取工作流字段
+    """
+    # 找到包含模式的分段
+    target_segment = next((s for s in field.split('-') if s.startswith('m[')), None)
+
+    if target_segment:
+        # 提取方括号内的内容
+        content = target_segment.split('[', 1)[1].split(']', 1)[0]
+        # 分割并处理文件名
+        filename = content.split('|', 1)[-1]  # synthLongWide.json
+        return filename.rsplit('.', 1)[0]  # 去除扩展名
+    return field  # 默认返回原字段
 
 
-name="{0}_{1}".format(trace_id, exp._name)
+workflow_name = extract_workflow(exp._name)
+name="{0}_{1}".format(trace_id, workflow_name)
 
 
-
+# ------------------------- 核心计算函数 -------------------------
 def get_waittimes_median_per_period_corrected(submit_stamps_list,
                                               start_stamps_list,
                                               period=60):
@@ -95,6 +119,7 @@ def get_waittimes_median_per_period_corrected(submit_stamps_list,
         final_formal_stamps: 正式时间戳列表
         final_formal_medians: 正式等待时间中位数列表
     """
+    # 初始化存储结构
     if not submit_stamps_list:
         return [], []
     period_start=submit_stamps_list[0]
@@ -115,6 +140,7 @@ def get_waittimes_median_per_period_corrected(submit_stamps_list,
     formal_wait_times=[]
     
     for (submit, start) in zip(submit_stamps_list, start_stamps_list):
+        # 记录已完成作业的等待时间
         if start>0:
             formal_wait_times.append(start-submit)
             try:
@@ -123,15 +149,17 @@ def get_waittimes_median_per_period_corrected(submit_stamps_list,
                 active_start_stamps[start]=[]
             active_start_stamps[start].append(submit)
         
-        # add the job as submitted
+        # 添加当前提交作业
         active_submit_stamps.append(submit)
         # check if jobs have ended since the last time we checked.
+        # 清理已完成的作业
         while sorted_starts and submit>sorted_starts[0]:
             if sorted_starts[0]>0:
                 for starting_job in active_start_stamps[sorted_starts[0]]:
                     active_submit_stamps.remove(starting_job)
                 del active_start_stamps[sorted_starts[0]]
             del sorted_starts[0]
+        # 周期性计算指标
         if submit-period_start>period:
             current_waits = [submit-x for x in active_submit_stamps]
             final_stamps.append(submit)
@@ -146,7 +174,10 @@ def get_waittimes_median_per_period_corrected(submit_stamps_list,
     return (final_stamps, final_medians, final_formal_stamps,
             final_formal_medians)
 
+# ------------------------- 数据处理 -------------------------
+ # 获取核心秒数分组边界
 edges = exp.get_machine().get_core_seconds_edges()
+# 获取分组后的作业时间数据
 (jobs_runtime, jobs_waittime, jobs_turnaround, jobs_timelimit,
                 jobs_cores_alloc, jobs_slowdown, jobs_timesubmit) = (
                                     rt.get_job_times_grouped_core_seconds(
@@ -163,6 +194,8 @@ stamps_dic_formal={}
 values_dic_formal={}
 
 first_stamp=0
+
+# 按核心秒数分组处理
 for edge in edges:
     if jobs_values_dic["time_submit"][edge]:
         the_val=jobs_values_dic["time_submit"][edge][0]
@@ -196,10 +229,11 @@ stamps_dic_formal["all"]=[float(x-first_stamp)/3600
 values_dic_correced["all"]=all_values
 values_dic_formal["all"]=all_values_formal
 
-# 绘制四张图表
+# ------------------------- 可视化输出 -------------------------
+# 生成当前等待时间图表（线性比例）
 paintPlotMultiV2("Median current wait time each minute\n{0}".format(name),
         stamps_dic_corrected, values_dic_correced,
-        dir=dest_dir, graphFileName="Ok-WaitTimes_{0}".format(name),
+        dir=dest_dir, graphFileName="WaitTimes_{0}".format(name),
            #xLim=(0,exp.get_end_epoch()-base_stamp), 
            labelX="time (h)", 
        labelY="Wait time (s)", \
@@ -208,10 +242,11 @@ paintPlotMultiV2("Median current wait time each minute\n{0}".format(name),
                   fontSizeX=12
                   )
 
+# 生成当前等待时间图表（对数比例）
 paintPlotMultiV2(
         "Median current wait time each minute (log scale)\n{0}".format(name),
         stamps_dic_corrected, values_dic_correced,
-        dir=dest_dir, graphFileName="Ok-WaitTimes_{0}-log".format(name),
+        dir=dest_dir, graphFileName="WaitTimes_{0}-log".format(name),
            #xLim=(0,exp.get_end_epoch()-base_stamp), 
            labelX="time (h)", 
        labelY="Wait time (s), log scale", \
@@ -219,11 +254,11 @@ paintPlotMultiV2(
               xLogScale=False, alpha=1.0, legendLoc=0, \
                   fontSizeX=12
                   )
-
+# 生成正式等待时间图表（线性比例）
 paintPlotMultiV2(
         "Median wait time of jobs submitted in each minute\n{0}".format(name),
         stamps_dic_formal, values_dic_formal,
-        dir=dest_dir, graphFileName="Ok-WaitTimes_{0}-formal".format(name),
+        dir=dest_dir, graphFileName="WaitTimes_{0}-formal".format(name),
            #xLim=(0,exp.get_end_epoch()-base_stamp), 
            labelX="time (h)", 
        labelY="Wait time (s)", \
@@ -232,11 +267,12 @@ paintPlotMultiV2(
                   fontSizeX=12
                   )
 
+# 生成正式等待时间图表（对数比例）
 paintPlotMultiV2(
         "Median wait time of jobs submitted in each minute (log scale)\n"
         "{0}".format(name),
         stamps_dic_formal, values_dic_formal,
-        dir=dest_dir, graphFileName="Ok-WaitTimes_{0}-formal-log".format(name),
+        dir=dest_dir, graphFileName="WaitTimes_{0}-formal-log".format(name),
            #xLim=(0,exp.get_end_epoch()-base_stamp), 
            labelX="time (h)", 
        labelY="Wait time (s), log scale", \
@@ -248,4 +284,5 @@ paintPlotMultiV2(
 
 waittime_median = median(jobs_waittime[edge])
 
+# 输出全局等待时间中位数
 print "Wait time median: {0}".format(waittime_median)

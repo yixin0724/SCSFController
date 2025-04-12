@@ -3,8 +3,11 @@
 后者表示为：对于时间t，需要多少生产的核心小时能力来处理提交的核心小时。
 
 输出是四个PNG文件，其中包含利用率和工作效率的变化：
-- 作为线形图: "PL-Utilization-[trace_id]-[trace_name_ob_db].png"
-- 作为散点图: "SC-Utilization-[trace_id]-[trace_name_ob_db].png"
+- 作为线形图: "PL-Utilization-[trace_id]-[workflow_name].png"
+- 作为线形图: "PL-UtilizationBack-[trace_id]-[workflow_name].png"
+- 作为线形图: "PL-OnlyUtilization-[trace_id]-[workflow_name].png"
+- 作为线形图: "PL-OnlyUtilizationBack-[trace_id]-[workflow_name].png"
+
 
 Usage:
 python plot_exp_utilization.py dest_dir trace_id
@@ -33,8 +36,16 @@ from stats.trace import ResultTrace
 matplotlib.use('Agg')
 
 
+"""
+该脚本分析集群资源利用率随时间的变化情况，并生成可视化图表。
+主要功能包括：
+1. 从数据库加载实验配置和跟踪数据
+2. 计算系统利用率、核心小时提交量等关键指标
+3. 生成多种可视化图表展示利用率变化趋势
+"""
+
 db_obj = get_central_db()
-target_dir="utilization-20160616-udog"   # 默认目标目录
+target_dir="out/"   # 默认目标目录
 
 if len(sys.argv)==3:
     target_dir= sys.argv[1] # 检查命令行参数是否正确
@@ -42,20 +53,27 @@ if len(sys.argv)==3:
 else:
     raise ValueError("Missing trace id to analyze")
 
+# 加载实验配置
 exp = ExperimentDefinition()
-
 exp.load(db_obj, trace_id)  # 加载实验定义
 
-rt = ResultTrace()  # 创建结果跟踪对象
-rt.load_trace(db_obj, trace_id)  # 加载跟踪数据
-machine = exp.get_machine() # 获取机器信息
-max_cores = machine.get_total_cores()   # 获取机器的总核心数
+# 加载跟踪数据
+rt = ResultTrace()
+rt.load_trace(db_obj, trace_id)  # 加载实验结果数据
 
-max_submit_time=rt._lists_submit["time_submit"][-1]     # 获取最大提交时间
+# 获取机器配置信息
+machine = exp.get_machine()
+max_cores = machine.get_total_cores()  # 系统总核心数
+max_submit_time = rt._lists_submit["time_submit"][-1]  # 最后提交时间
 
 def adjust_ut_plot(ut_stamps, ut_values):
     """
-    调整利用率的时间戳和值，确保绘图时数据连续。
+    调整利用率曲线的时间戳，使折线图连续显示
+    参数:
+        ut_stamps - 原始时间戳列表
+        ut_values - 原始利用率值列表
+    返回:
+        调整后的时间戳和值列表，每个值点前后插入相同时间点保持连续性
     """
     new_stamps=[]
     new_values=[]
@@ -83,6 +101,7 @@ utilization_timestamps, utilization_values = adjust_ut_plot(
                                                         utilization_timestamps,
                                                         utilization_values)
 
+# 计算工作负载指标（60秒聚合窗口）
 acc_period=60
 # 计算等待时间、提交的核心小时数等指标
 (waiting_ch_stamps, waiting_ch_values,
@@ -113,6 +132,7 @@ core_h_per_min_values= [float(x)/(float(max_cores))
 stamp_dic={}
 value_dic={}
 
+# 准备绘图数据
 stamp_dic["Utilization"]=utilization_timestamps
 stamp_dic["Submit/Produced"]=core_h_per_min_stamps
 
@@ -124,7 +144,10 @@ value_dic["Submit/Produced"]=core_h_per_min_values
 
 def get_sched_waits(trace_id):
     """
-    计算调度间隔（调度延迟）。
+    计算调度间隔（作业开始时间之间的间隔）
+    返回:
+        sched_gaps_stamp - 调度间隔对应的时间戳
+        sched_gaps - 调度间隔时长列表
     """
     rt = ResultTrace()
     rt.load_trace(db_obj, trace_id)
@@ -140,6 +163,8 @@ def get_sched_waits(trace_id):
     sched_gaps_stamp = []
     the_max=0
     the_max_id=-1
+
+    # 遍历计算连续作业开始时间差
     for s1, s2, id_job in zip(start_times[:-1], start_times[1:], id_jobs[1:]):
         if (s1!=0 and s2!=0):
             sched_gap=s2-s1
@@ -149,9 +174,10 @@ def get_sched_waits(trace_id):
                 if sched_gap>the_max:
                     the_max=sched_gap
                     the_max_id=id_job
-    print "MAAAAX", the_max, the_max_id
+    print "MAX scheduling interval：", the_max, "Job Id：",the_max_id
     return sched_gaps_stamp, sched_gaps
 
+# 获取调度间隔数据
 sched_gaps_stamp, sched_gaps = get_sched_waits(trace_id)
 sched_gaps_stamp=[x-base_stamp
                    for x in sched_gaps_stamp]
@@ -160,8 +186,25 @@ value_dic_gap={"gaps":sched_gaps}
 stamps_dic_gap={"gaps":sched_gaps_stamp}
 
 
+def extract_workflow(field):
+    """
+    精确模式匹配
+    适用于严格遵循 m[version|filename.json] 格式的情况
+    """
+    # 找到包含模式的分段
+    target_segment = next((s for s in field.split('-') if s.startswith('m[')), None)
 
-name = "{0}-{1}".format(trace_id, exp._name)
+    if target_segment:
+        # 提取方括号内的内容
+        content = target_segment.split('[', 1)[1].split(']', 1)[0]
+        # 分割并处理文件名
+        filename = content.split('|', 1)[-1]  # synthLongWide.json
+        return filename.rsplit('.', 1)[0]  # 去除扩展名
+    return field  # 默认返回原字段
+
+# 生成图表文件名
+workflow_name = extract_workflow(exp._name)
+name = "{0}-{1}".format(trace_id, workflow_name)
 
 
 # 绘制带调度间隔的利用率图
