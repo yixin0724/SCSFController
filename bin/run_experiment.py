@@ -53,7 +53,7 @@ class TestExperiment(unittest.TestCase):
             “manifest”：其中工作流作为单个作业提交，但使用了感知工作流的回填.即Woas提交
         subtraces: 本实验分析中应使用的迹线的trace_id （int）列表。只对delta和群实验有效。
         pre_load_time_s参数：表示在start_date之前生成的工作负载秒数。此工作负载用于“加载”调度器，但是分析将仅从“start_date”开始执行。
-        workload_duration_s参数：表示表示在start_date之后生成的工作负载秒数。
+        workload_duration_s参数：表示在start_date之后生成的工作负载秒数。
         overload_target: 如果设置为> 1.0，则在预加载期间生成的工作负载将产生额外的作业，
                 因此在一段时间内，将提交overload_target乘以系统的容量（在该期间产生的）。
     """

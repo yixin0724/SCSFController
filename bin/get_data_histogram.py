@@ -41,7 +41,7 @@ def plot_histogram(bins, edges,type):
         align='edge',
         edgecolor='k',
         color='skyblue',
-        label='Probability Density'  # 关键修复：显式设置标签
+        label='Probability Density'
     )
 
     # 绘制CDF曲线（右轴）
@@ -97,7 +97,7 @@ conn = pymysql.connect(
 # 2. 查询数据
 try:
     with conn.cursor() as cursor:
-        cursor.execute("SELECT type, bins, edges FROM histograms WHERE trace_id = 10")
+        cursor.execute("SELECT type, bins, edges FROM histograms WHERE trace_id = 26")
         rows = cursor.fetchall()
 
         for row in rows:

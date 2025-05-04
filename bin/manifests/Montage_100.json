@@ -1,0 +1,1081 @@
+{
+  "max_cores": 62,
+  "tasks": [
+    {
+      "name": "S0",
+      "execution_cmd": "./S0.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.85,
+      "runtime_sim": 13.85,
+      "id": "S0"
+    },
+    {
+      "name": "S1",
+      "execution_cmd": "./S1.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.11,
+      "runtime_sim": 13.11,
+      "id": "S1"
+    },
+    {
+      "name": "S2",
+      "execution_cmd": "./S2.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.42,
+      "runtime_sim": 13.42,
+      "id": "S2"
+    },
+    {
+      "name": "S3",
+      "execution_cmd": "./S3.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.3,
+      "runtime_sim": 13.3,
+      "id": "S3"
+    },
+    {
+      "name": "S4",
+      "execution_cmd": "./S4.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.16,
+      "runtime_sim": 13.16,
+      "id": "S4"
+    },
+    {
+      "name": "S5",
+      "execution_cmd": "./S5.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.57,
+      "runtime_sim": 13.57,
+      "id": "S5"
+    },
+    {
+      "name": "S6",
+      "execution_cmd": "./S6.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.25,
+      "runtime_sim": 13.25,
+      "id": "S6"
+    },
+    {
+      "name": "S7",
+      "execution_cmd": "./S7.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.65,
+      "runtime_sim": 13.65,
+      "id": "S7"
+    },
+    {
+      "name": "S8",
+      "execution_cmd": "./S8.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.63,
+      "runtime_sim": 13.63,
+      "id": "S8"
+    },
+    {
+      "name": "S9",
+      "execution_cmd": "./S9.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.7,
+      "runtime_sim": 13.7,
+      "id": "S9"
+    },
+    {
+      "name": "S10",
+      "execution_cmd": "./S10.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.55,
+      "runtime_sim": 13.55,
+      "id": "S10"
+    },
+    {
+      "name": "S11",
+      "execution_cmd": "./S11.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.81,
+      "runtime_sim": 13.81,
+      "id": "S11"
+    },
+    {
+      "name": "S12",
+      "execution_cmd": "./S12.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.62,
+      "runtime_sim": 13.62,
+      "id": "S12"
+    },
+    {
+      "name": "S13",
+      "execution_cmd": "./S13.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.36,
+      "runtime_sim": 13.36,
+      "id": "S13"
+    },
+    {
+      "name": "S14",
+      "execution_cmd": "./S14.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.17,
+      "runtime_sim": 13.17,
+      "id": "S14"
+    },
+    {
+      "name": "S15",
+      "execution_cmd": "./S15.py",
+      "number_of_cores": 1,
+      "runtime_limit": 73.58,
+      "runtime_sim": 13.58,
+      "id": "S15"
+    },
+    {
+      "name": "S38",
+      "execution_cmd": "./S38.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.57,
+      "runtime_sim": 10.57,
+      "id": "S38"
+    },
+    {
+      "name": "S33",
+      "execution_cmd": "./S33.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.6,
+      "runtime_sim": 10.6,
+      "id": "S33"
+    },
+    {
+      "name": "S30",
+      "execution_cmd": "./S30.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.58,
+      "runtime_sim": 10.58,
+      "id": "S30"
+    },
+    {
+      "name": "S29",
+      "execution_cmd": "./S29.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.64,
+      "runtime_sim": 10.64,
+      "id": "S29"
+    },
+    {
+      "name": "S58",
+      "execution_cmd": "./S58.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.45,
+      "runtime_sim": 10.45,
+      "id": "S58"
+    },
+    {
+      "name": "S59",
+      "execution_cmd": "./S59.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.64,
+      "runtime_sim": 10.64,
+      "id": "S59"
+    },
+    {
+      "name": "S60",
+      "execution_cmd": "./S60.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.58,
+      "runtime_sim": 10.58,
+      "id": "S60"
+    },
+    {
+      "name": "S88",
+      "execution_cmd": "./S88.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.74,
+      "runtime_sim": 10.74,
+      "id": "S88"
+    },
+    {
+      "name": "S62",
+      "execution_cmd": "./S62.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.61,
+      "runtime_sim": 10.61,
+      "id": "S62"
+    },
+    {
+      "name": "S63",
+      "execution_cmd": "./S63.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.58,
+      "runtime_sim": 10.58,
+      "id": "S63"
+    },
+    {
+      "name": "S64",
+      "execution_cmd": "./S64.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.67,
+      "runtime_sim": 10.67,
+      "id": "S64"
+    },
+    {
+      "name": "S65",
+      "execution_cmd": "./S65.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.67,
+      "runtime_sim": 10.67,
+      "id": "S65"
+    },
+    {
+      "name": "S66",
+      "execution_cmd": "./S66.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.57,
+      "runtime_sim": 10.57,
+      "id": "S66"
+    },
+    {
+      "name": "S67",
+      "execution_cmd": "./S67.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.74,
+      "runtime_sim": 10.74,
+      "id": "S67"
+    },
+    {
+      "name": "S28",
+      "execution_cmd": "./S28.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.91,
+      "runtime_sim": 10.91,
+      "id": "S28"
+    },
+    {
+      "name": "S27",
+      "execution_cmd": "./S27.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.55,
+      "runtime_sim": 10.55,
+      "id": "S27"
+    },
+    {
+      "name": "S26",
+      "execution_cmd": "./S26.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.49,
+      "runtime_sim": 10.49,
+      "id": "S26"
+    },
+    {
+      "name": "S25",
+      "execution_cmd": "./S25.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.61,
+      "runtime_sim": 10.61,
+      "id": "S25"
+    },
+    {
+      "name": "S32",
+      "execution_cmd": "./S32.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.53,
+      "runtime_sim": 10.53,
+      "id": "S32"
+    },
+    {
+      "name": "S31",
+      "execution_cmd": "./S31.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.53,
+      "runtime_sim": 10.53,
+      "id": "S31"
+    },
+    {
+      "name": "S93",
+      "execution_cmd": "./S93.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.67,
+      "runtime_sim": 10.67,
+      "id": "S93"
+    },
+    {
+      "name": "S91",
+      "execution_cmd": "./S91.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.53999999999999,
+      "runtime_sim": 10.54,
+      "id": "S91"
+    },
+    {
+      "name": "S34",
+      "execution_cmd": "./S34.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.41,
+      "runtime_sim": 10.41,
+      "id": "S34"
+    },
+    {
+      "name": "S35",
+      "execution_cmd": "./S35.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.58,
+      "runtime_sim": 10.58,
+      "id": "S35"
+    },
+    {
+      "name": "S18",
+      "execution_cmd": "./S18.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.51,
+      "runtime_sim": 10.51,
+      "id": "S18"
+    },
+    {
+      "name": "S22",
+      "execution_cmd": "./S22.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.77,
+      "runtime_sim": 10.77,
+      "id": "S22"
+    },
+    {
+      "name": "S90",
+      "execution_cmd": "./S90.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.46000000000001,
+      "runtime_sim": 10.46,
+      "id": "S90"
+    },
+    {
+      "name": "S86",
+      "execution_cmd": "./S86.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.4,
+      "runtime_sim": 10.4,
+      "id": "S86"
+    },
+    {
+      "name": "S84",
+      "execution_cmd": "./S84.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.53999999999999,
+      "runtime_sim": 10.54,
+      "id": "S84"
+    },
+    {
+      "name": "S61",
+      "execution_cmd": "./S61.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.56,
+      "runtime_sim": 10.56,
+      "id": "S61"
+    },
+    {
+      "name": "S72",
+      "execution_cmd": "./S72.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.62,
+      "runtime_sim": 10.62,
+      "id": "S72"
+    },
+    {
+      "name": "S78",
+      "execution_cmd": "./S78.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.59,
+      "runtime_sim": 10.59,
+      "id": "S78"
+    },
+    {
+      "name": "S69",
+      "execution_cmd": "./S69.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.48,
+      "runtime_sim": 10.48,
+      "id": "S69"
+    },
+    {
+      "name": "S70",
+      "execution_cmd": "./S70.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.69,
+      "runtime_sim": 10.69,
+      "id": "S70"
+    },
+    {
+      "name": "S44",
+      "execution_cmd": "./S44.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.65,
+      "runtime_sim": 10.65,
+      "id": "S44"
+    },
+    {
+      "name": "S43",
+      "execution_cmd": "./S43.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.55,
+      "runtime_sim": 10.55,
+      "id": "S43"
+    },
+    {
+      "name": "S16",
+      "execution_cmd": "./S16.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.66,
+      "runtime_sim": 10.66,
+      "id": "S16"
+    },
+    {
+      "name": "S92",
+      "execution_cmd": "./S92.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.55,
+      "runtime_sim": 10.55,
+      "id": "S92"
+    },
+    {
+      "name": "S48",
+      "execution_cmd": "./S48.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.56,
+      "runtime_sim": 10.56,
+      "id": "S48"
+    },
+    {
+      "name": "S47",
+      "execution_cmd": "./S47.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.47,
+      "runtime_sim": 10.47,
+      "id": "S47"
+    },
+    {
+      "name": "S50",
+      "execution_cmd": "./S50.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.48,
+      "runtime_sim": 10.48,
+      "id": "S50"
+    },
+    {
+      "name": "S49",
+      "execution_cmd": "./S49.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.51,
+      "runtime_sim": 10.51,
+      "id": "S49"
+    },
+    {
+      "name": "S37",
+      "execution_cmd": "./S37.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.59,
+      "runtime_sim": 10.59,
+      "id": "S37"
+    },
+    {
+      "name": "S36",
+      "execution_cmd": "./S36.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.72,
+      "runtime_sim": 10.72,
+      "id": "S36"
+    },
+    {
+      "name": "S83",
+      "execution_cmd": "./S83.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.49,
+      "runtime_sim": 10.49,
+      "id": "S83"
+    },
+    {
+      "name": "S24",
+      "execution_cmd": "./S24.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.64,
+      "runtime_sim": 10.64,
+      "id": "S24"
+    },
+    {
+      "name": "S85",
+      "execution_cmd": "./S85.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.46000000000001,
+      "runtime_sim": 10.46,
+      "id": "S85"
+    },
+    {
+      "name": "S68",
+      "execution_cmd": "./S68.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.35,
+      "runtime_sim": 10.35,
+      "id": "S68"
+    },
+    {
+      "name": "S79",
+      "execution_cmd": "./S79.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.64,
+      "runtime_sim": 10.64,
+      "id": "S79"
+    },
+    {
+      "name": "S80",
+      "execution_cmd": "./S80.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.59,
+      "runtime_sim": 10.59,
+      "id": "S80"
+    },
+    {
+      "name": "S17",
+      "execution_cmd": "./S17.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.72,
+      "runtime_sim": 10.72,
+      "id": "S17"
+    },
+    {
+      "name": "S19",
+      "execution_cmd": "./S19.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.57,
+      "runtime_sim": 10.57,
+      "id": "S19"
+    },
+    {
+      "name": "S75",
+      "execution_cmd": "./S75.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.61,
+      "runtime_sim": 10.61,
+      "id": "S75"
+    },
+    {
+      "name": "S76",
+      "execution_cmd": "./S76.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.66,
+      "runtime_sim": 10.66,
+      "id": "S76"
+    },
+    {
+      "name": "S51",
+      "execution_cmd": "./S51.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.77,
+      "runtime_sim": 10.77,
+      "id": "S51"
+    },
+    {
+      "name": "S57",
+      "execution_cmd": "./S57.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.43,
+      "runtime_sim": 10.43,
+      "id": "S57"
+    },
+    {
+      "name": "S53",
+      "execution_cmd": "./S53.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.78999999999999,
+      "runtime_sim": 10.79,
+      "id": "S53"
+    },
+    {
+      "name": "S20",
+      "execution_cmd": "./S20.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.65,
+      "runtime_sim": 10.65,
+      "id": "S20"
+    },
+    {
+      "name": "S46",
+      "execution_cmd": "./S46.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.49,
+      "runtime_sim": 10.49,
+      "id": "S46"
+    },
+    {
+      "name": "S54",
+      "execution_cmd": "./S54.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.61,
+      "runtime_sim": 10.61,
+      "id": "S54"
+    },
+    {
+      "name": "S89",
+      "execution_cmd": "./S89.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.47,
+      "runtime_sim": 10.47,
+      "id": "S89"
+    },
+    {
+      "name": "S87",
+      "execution_cmd": "./S87.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.65,
+      "runtime_sim": 10.65,
+      "id": "S87"
+    },
+    {
+      "name": "S95",
+      "execution_cmd": "./S95.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.3,
+      "runtime_sim": 10.3,
+      "id": "S95"
+    },
+    {
+      "name": "S73",
+      "execution_cmd": "./S73.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.88,
+      "runtime_sim": 10.88,
+      "id": "S73"
+    },
+    {
+      "name": "S74",
+      "execution_cmd": "./S74.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.96000000000001,
+      "runtime_sim": 10.96,
+      "id": "S74"
+    },
+    {
+      "name": "S71",
+      "execution_cmd": "./S71.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.61,
+      "runtime_sim": 10.61,
+      "id": "S71"
+    },
+    {
+      "name": "S56",
+      "execution_cmd": "./S56.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.73,
+      "runtime_sim": 10.73,
+      "id": "S56"
+    },
+    {
+      "name": "S77",
+      "execution_cmd": "./S77.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.66,
+      "runtime_sim": 10.66,
+      "id": "S77"
+    },
+    {
+      "name": "S82",
+      "execution_cmd": "./S82.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.49,
+      "runtime_sim": 10.49,
+      "id": "S82"
+    },
+    {
+      "name": "S21",
+      "execution_cmd": "./S21.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.9,
+      "runtime_sim": 10.9,
+      "id": "S21"
+    },
+    {
+      "name": "S45",
+      "execution_cmd": "./S45.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.75,
+      "runtime_sim": 10.75,
+      "id": "S45"
+    },
+    {
+      "name": "S81",
+      "execution_cmd": "./S81.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.72,
+      "runtime_sim": 10.72,
+      "id": "S81"
+    },
+    {
+      "name": "S23",
+      "execution_cmd": "./S23.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.86,
+      "runtime_sim": 10.86,
+      "id": "S23"
+    },
+    {
+      "name": "S40",
+      "execution_cmd": "./S40.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.74,
+      "runtime_sim": 10.74,
+      "id": "S40"
+    },
+    {
+      "name": "S39",
+      "execution_cmd": "./S39.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.69,
+      "runtime_sim": 10.69,
+      "id": "S39"
+    },
+    {
+      "name": "S42",
+      "execution_cmd": "./S42.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.74,
+      "runtime_sim": 10.74,
+      "id": "S42"
+    },
+    {
+      "name": "S41",
+      "execution_cmd": "./S41.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.69,
+      "runtime_sim": 10.69,
+      "id": "S41"
+    },
+    {
+      "name": "S55",
+      "execution_cmd": "./S55.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.73,
+      "runtime_sim": 10.73,
+      "id": "S55"
+    },
+    {
+      "name": "S52",
+      "execution_cmd": "./S52.py",
+      "number_of_cores": 1,
+      "runtime_limit": 70.78,
+      "runtime_sim": 10.78,
+      "id": "S52"
+    },
+    {
+      "name": "S94",
+      "execution_cmd": "./S94.py",
+      "number_of_cores": 1,
+      "runtime_limit": 84.97,
+      "runtime_sim": 24.969999999999995,
+      "id": "S94"
+    }
+  ],
+  "total_runtime": 70.72,
+  "resource_steps": [
+    {
+      "num_cores": 16,
+      "end_time": 13.11
+    },
+    {
+      "num_cores": 15,
+      "end_time": 13.16
+    },
+    {
+      "num_cores": 14,
+      "end_time": 13.17
+    },
+    {
+      "num_cores": 13,
+      "end_time": 13.25
+    },
+    {
+      "num_cores": 15,
+      "end_time": 13.3
+    },
+    {
+      "num_cores": 15,
+      "end_time": 13.36
+    },
+    {
+      "num_cores": 19,
+      "end_time": 13.42
+    },
+    {
+      "num_cores": 21,
+      "end_time": 13.55
+    },
+    {
+      "num_cores": 26,
+      "end_time": 13.57
+    },
+    {
+      "num_cores": 28,
+      "end_time": 13.58
+    },
+    {
+      "num_cores": 32,
+      "end_time": 13.62
+    },
+    {
+      "num_cores": 39,
+      "end_time": 13.63
+    },
+    {
+      "num_cores": 44,
+      "end_time": 13.65
+    },
+    {
+      "num_cores": 50,
+      "end_time": 13.7
+    },
+    {
+      "num_cores": 52,
+      "end_time": 13.81
+    },
+    {
+      "num_cores": 56,
+      "end_time": 13.85
+    },
+    {
+      "num_cores": 62,
+      "end_time": 23.759999999999998
+    },
+    {
+      "num_cores": 61,
+      "end_time": 23.83
+    },
+    {
+      "num_cores": 59,
+      "end_time": 23.9
+    },
+    {
+      "num_cores": 58,
+      "end_time": 23.94
+    },
+    {
+      "num_cores": 57,
+      "end_time": 23.95
+    },
+    {
+      "num_cores": 56,
+      "end_time": 23.950000000000003
+    },
+    {
+      "num_cores": 55,
+      "end_time": 23.97
+    },
+    {
+      "num_cores": 53,
+      "end_time": 23.98
+    },
+    {
+      "num_cores": 52,
+      "end_time": 24.020000000000003
+    },
+    {
+      "num_cores": 51,
+      "end_time": 24.03
+    },
+    {
+      "num_cores": 49,
+      "end_time": 24.04
+    },
+    {
+      "num_cores": 48,
+      "end_time": 24.049999999999997
+    },
+    {
+      "num_cores": 47,
+      "end_time": 24.07
+    },
+    {
+      "num_cores": 46,
+      "end_time": 24.08
+    },
+    {
+      "num_cores": 45,
+      "end_time": 24.11
+    },
+    {
+      "num_cores": 43,
+      "end_time": 24.15
+    },
+    {
+      "num_cores": 41,
+      "end_time": 24.159999999999997
+    },
+    {
+      "num_cores": 40,
+      "end_time": 24.16
+    },
+    {
+      "num_cores": 37,
+      "end_time": 24.18
+    },
+    {
+      "num_cores": 36,
+      "end_time": 24.189999999999998
+    },
+    {
+      "num_cores": 35,
+      "end_time": 24.19
+    },
+    {
+      "num_cores": 34,
+      "end_time": 24.200000000000003
+    },
+    {
+      "num_cores": 33,
+      "end_time": 24.21
+    },
+    {
+      "num_cores": 32,
+      "end_time": 24.23
+    },
+    {
+      "num_cores": 29,
+      "end_time": 24.240000000000002
+    },
+    {
+      "num_cores": 25,
+      "end_time": 24.259999999999998
+    },
+    {
+      "num_cores": 24,
+      "end_time": 24.27
+    },
+    {
+      "num_cores": 23,
+      "end_time": 24.270000000000003
+    },
+    {
+      "num_cores": 22,
+      "end_time": 24.28
+    },
+    {
+      "num_cores": 20,
+      "end_time": 24.29
+    },
+    {
+      "num_cores": 16,
+      "end_time": 24.299999999999997
+    },
+    {
+      "num_cores": 15,
+      "end_time": 24.3
+    },
+    {
+      "num_cores": 14,
+      "end_time": 24.310000000000002
+    },
+    {
+      "num_cores": 13,
+      "end_time": 24.32
+    },
+    {
+      "num_cores": 12,
+      "end_time": 24.33
+    },
+    {
+      "num_cores": 11,
+      "end_time": 24.34
+    },
+    {
+      "num_cores": 10,
+      "end_time": 24.36
+    },
+    {
+      "num_cores": 9,
+      "end_time": 24.39
+    },
+    {
+      "num_cores": 8,
+      "end_time": 24.4
+    },
+    {
+      "num_cores": 7,
+      "end_time": 24.41
+    },
+    {
+      "num_cores": 6,
+      "end_time": 24.42
+    },
+    {
+      "num_cores": 4,
+      "end_time": 24.43
+    },
+    {
+      "num_cores": 3,
+      "end_time": 24.45
+    },
+    {
+      "num_cores": 2,
+      "end_time": 24.450000000000003
+    },
+    {
+      "num_cores": 1,
+      "end_time": 24.490000000000002
+    },
+    {
+      "num_cores": 1,
+      "end_time": 34.790000000000006
+    },
+    {
+      "num_cores": 16,
+      "end_time": 45.28000000000001
+    },
+    {
+      "num_cores": 15,
+      "end_time": 45.400000000000006
+    },
+    {
+      "num_cores": 14,
+      "end_time": 45.45
+    },
+    {
+      "num_cores": 13,
+      "end_time": 45.480000000000004
+    },
+    {
+      "num_cores": 11,
+      "end_time": 45.510000000000005
+    },
+    {
+      "num_cores": 10,
+      "end_time": 45.52000000000001
+    },
+    {
+      "num_cores": 8,
+      "end_time": 45.53000000000001
+    },
+    {
+      "num_cores": 6,
+      "end_time": 45.540000000000006
+    },
+    {
+      "num_cores": 5,
+      "end_time": 45.57000000000001
+    },
+    {
+      "num_cores": 4,
+      "end_time": 45.650000000000006
+    },
+    {
+      "num_cores": 3,
+      "end_time": 45.67000000000001
+    },
+    {
+      "num_cores": 2,
+      "end_time": 45.690000000000005
+    },
+    {
+      "num_cores": 1,
+      "end_time": 45.75000000000001
+    },
+    {
+      "num_cores": 1,
+      "end_time": 70.72
+    }
+  ],
+  "dot_dag": "strict digraph  {\n\tS0 -> S38;\n\tS0 -> S33;\n\tS0 -> S30;\n\tS0 -> S29;\n\tS0 -> S58;\n\tS0 -> S61;\n\tS0 -> S85;\n\tS0 -> S73;\n\tS1 -> S38;\n\tS1 -> S58;\n\tS1 -> S59;\n\tS1 -> S60;\n\tS1 -> S88;\n\tS1 -> S62;\n\tS1 -> S63;\n\tS1 -> S64;\n\tS1 -> S65;\n\tS1 -> S66;\n\tS1 -> S34;\n\tS1 -> S35;\n\tS1 -> S47;\n\tS1 -> S75;\n\tS1 -> S74;\n\tS2 -> S67;\n\tS2 -> S28;\n\tS2 -> S31;\n\tS2 -> S72;\n\tS2 -> S20;\n\tS2 -> S71;\n\tS3 -> S59;\n\tS3 -> S67;\n\tS3 -> S27;\n\tS3 -> S26;\n\tS3 -> S25;\n\tS3 -> S32;\n\tS3 -> S78;\n\tS3 -> S50;\n\tS3 -> S46;\n\tS3 -> S56;\n\tS4 -> S31;\n\tS4 -> S93;\n\tS4 -> S91;\n\tS4 -> S18;\n\tS4 -> S70;\n\tS4 -> S80;\n\tS4 -> S77;\n\tS5 -> S34;\n\tS5 -> S49;\n\tS5 -> S76;\n\tS5 -> S82;\n\tS6 -> S60;\n\tS6 -> S28;\n\tS6 -> S35;\n\tS6 -> S18;\n\tS6 -> S22;\n\tS6 -> S90;\n\tS6 -> S86;\n\tS6 -> S84;\n\tS6 -> S21;\n\tS7 -> S88;\n\tS7 -> S27;\n\tS7 -> S61;\n\tS7 -> S72;\n\tS7 -> S78;\n\tS7 -> S69;\n\tS7 -> S44;\n\tS7 -> S37;\n\tS7 -> S51;\n\tS7 -> S45;\n\tS8 -> S62;\n\tS8 -> S22;\n\tS8 -> S70;\n\tS8 -> S44;\n\tS8 -> S43;\n\tS8 -> S16;\n\tS8 -> S92;\n\tS8 -> S68;\n\tS8 -> S54;\n\tS8 -> S81;\n\tS9 -> S33;\n\tS9 -> S63;\n\tS9 -> S90;\n\tS9 -> S48;\n\tS9 -> S23;\n\tS10 -> S86;\n\tS10 -> S16;\n\tS10 -> S47;\n\tS10 -> S50;\n\tS10 -> S49;\n\tS10 -> S37;\n\tS10 -> S36;\n\tS10 -> S83;\n\tS10 -> S24;\n\tS10 -> S40;\n\tS11 -> S30;\n\tS11 -> S69;\n\tS11 -> S92;\n\tS11 -> S85;\n\tS11 -> S68;\n\tS11 -> S79;\n\tS11 -> S89;\n\tS11 -> S39;\n\tS12 -> S64;\n\tS12 -> S26;\n\tS12 -> S93;\n\tS12 -> S84;\n\tS12 -> S80;\n\tS12 -> S17;\n\tS12 -> S19;\n\tS12 -> S57;\n\tS12 -> S42;\n\tS13 -> S29;\n\tS13 -> S65;\n\tS13 -> S25;\n\tS13 -> S91;\n\tS13 -> S83;\n\tS13 -> S75;\n\tS13 -> S76;\n\tS13 -> S51;\n\tS13 -> S57;\n\tS13 -> S53;\n\tS13 -> S41;\n\tS14 -> S24;\n\tS14 -> S79;\n\tS14 -> S87;\n\tS14 -> S55;\n\tS15 -> S66;\n\tS15 -> S32;\n\tS15 -> S19;\n\tS15 -> S20;\n\tS15 -> S46;\n\tS15 -> S54;\n\tS15 -> S89;\n\tS15 -> S87;\n\tS15 -> S52;\n\tS38 -> S95;\n\tS33 -> S95;\n\tS30 -> S95;\n\tS29 -> S95;\n\tS58 -> S95;\n\tS59 -> S95;\n\tS60 -> S95;\n\tS88 -> S95;\n\tS62 -> S95;\n\tS63 -> S95;\n\tS64 -> S95;\n\tS65 -> S95;\n\tS66 -> S95;\n\tS67 -> S95;\n\tS28 -> S95;\n\tS27 -> S95;\n\tS26 -> S95;\n\tS25 -> S95;\n\tS32 -> S95;\n\tS31 -> S95;\n\tS93 -> S95;\n\tS91 -> S95;\n\tS34 -> S95;\n\tS35 -> S95;\n\tS18 -> S95;\n\tS22 -> S95;\n\tS90 -> S95;\n\tS86 -> S95;\n\tS84 -> S95;\n\tS61 -> S95;\n\tS72 -> S95;\n\tS78 -> S95;\n\tS69 -> S95;\n\tS70 -> S95;\n\tS44 -> S95;\n\tS43 -> S95;\n\tS16 -> S95;\n\tS92 -> S95;\n\tS48 -> S95;\n\tS47 -> S95;\n\tS50 -> S95;\n\tS49 -> S95;\n\tS37 -> S95;\n\tS36 -> S95;\n\tS83 -> S95;\n\tS24 -> S95;\n\tS85 -> S95;\n\tS68 -> S95;\n\tS79 -> S95;\n\tS80 -> S95;\n\tS17 -> S95;\n\tS19 -> S95;\n\tS75 -> S95;\n\tS76 -> S95;\n\tS51 -> S95;\n\tS57 -> S95;\n\tS53 -> S95;\n\tS20 -> S95;\n\tS46 -> S95;\n\tS54 -> S95;\n\tS89 -> S95;\n\tS87 -> S95;\n\tS95 -> S73;\n\tS95 -> S74;\n\tS95 -> S71;\n\tS95 -> S56;\n\tS95 -> S77;\n\tS95 -> S82;\n\tS95 -> S21;\n\tS95 -> S45;\n\tS95 -> S81;\n\tS95 -> S23;\n\tS95 -> S40;\n\tS95 -> S39;\n\tS95 -> S42;\n\tS95 -> S41;\n\tS95 -> S55;\n\tS95 -> S52;\n\tS73 -> S94;\n\tS74 -> S94;\n\tS71 -> S94;\n\tS56 -> S94;\n\tS77 -> S94;\n\tS82 -> S94;\n\tS21 -> S94;\n\tS45 -> S94;\n\tS81 -> S94;\n\tS23 -> S94;\n\tS40 -> S94;\n\tS39 -> S94;\n\tS42 -> S94;\n\tS41 -> S94;\n\tS55 -> S94;\n\tS52 -> S94;\n}\n"
+}

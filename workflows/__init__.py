@@ -6,39 +6,63 @@ import sys
 
 def convert_xml_wf_to_json_manifest(xml_route, json_route, grouped_jobs=[],
                                     max_cores=None, namespace=None):
-    """ 从xml文件中读取工作流定义，转换为工作流感知的backfile json manifest，并将其写入另一个文件。
+    """
+    该函数读取Pegasus工作流定义XML文件，执行作业融合、依赖关系调整等转换操作，
+    最终生成可用于工作流感知系统的JSON格式清单文件。
     Args:
     - xml_route: 文件系统路由字符串指向一个包含工作流定义的XML文件，格式为：
         https://confluence.pegasus.isi.edu/display/pegasus/WorkflowGenerator
-    - json_route: 文件系统路由字符串，指向将在哪里创建一个json文件，该文件包含read xml_route的Manifest版本。
-    - grouped_jobs: 包含已读xml中存在的作业名称的字符串列表。
-        对于grouped_jobs中的每个作业名称，具有该名称的所有作业将被分组到单个作业中。
+    - json_route (str): 输出JSON文件的存储路径，该文件包含read xml_route的Manifest版本。
+    - grouped_jobs (list[str], optional): 需要合并的作业名称列表。列表中指定的
+            同名作业将被合并为单个作业。默认为空列表
+    - max_cores (int, optional): 最大核心数限制，用于资源分配策略。未指定时为None
+            表示无限制
+    - namespace (str, optional): XML命名空间。未指定时自动从文档中解析
+
+    Returns:
+        None: 无直接返回值，转换结果将写入指定JSON文件
     """
+
+    # 加载并解析XML工作流文档
     print "Loading XML:", xml_route
     xml_wf = ET.parse(xml_route)
     print "XML Loaded"
+
+    # 命名空间处理：自动解析或使用传入值
     if namespace is None:
         namespace=_get_namespace(xml_wf)
+
+    # 提取工作流核心元素：作业节点和依赖关系
     print "Getting Jobs and dependencies"
     jobs, deps = _get_jobs_and_deps(xml_wf, namespace=namespace)
     print "Jobs and dependencies extraced: {0} jobs and {1} deps".format(
                                 len(jobs), len(deps))          
-    del xml_wf    
+    del xml_wf  # 释放XML文档内存
     print "XML tree deallocated"
+
+    # 作业合并处理
     print "Fusing jobs"
     jobs, job_fusing_dic= _fuse_jobs(jobs, grouped_jobs,
                                      max_cores=max_cores)
     print "Fusing jobs Done", job_fusing_dic
+
+    # 依赖关系调整
     print "Fusing deps", deps
     deps = _fuse_deps(deps, job_fusing_dic)
     print "Fusing deps Done", deps
+
+    # 顺序作业链合并
     print "Sequence fusing"
     _fuse_sequence_jobs(jobs, deps)
     print "Sequence fusing Done", deps
+
+    # 作业重命名处理
     print "Renaming jobs"
     new_job_names=_get_jobs_names(jobs,deps)
     jobs, deps = _rename_jobs(jobs, deps, new_job_names)
     print "Renaming jobs Done"
+
+    # 生成并保存最终JSON清单
     manifest_dic=_encode_manifest_dic(jobs, deps)
     f_out=open(json_route, "wb")
     json.dump(manifest_dic, f_out)   
@@ -314,6 +338,18 @@ def _get_jobs_names(jobs, deps):
     return new_ids
 
 def get_tag(tag, namespace=None):
+    """
+       生成带命名空间的XML标签字符串
+       根据输入的标签名称和可选的命名空间参数，返回格式正确的标签字符串。
+       当未提供命名空间时，直接返回原始标签名称。
+       Args:
+           tag (str): 必选参数，表示标签名称
+           namespace (str, optional): 可选命名空间，默认为None。
+               当提供时，会作为标签的前缀
+       Returns:
+           str: 格式化后的标签字符串。当存在namespace时格式为"{namespace}tag"，
+               否则直接返回原tag
+       """
     if namespace is None:
         return tag
     else:
