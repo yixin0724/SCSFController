@@ -33,7 +33,7 @@ class TestExperiment(unittest.TestCase):
     """
     实验的定义
         实验组的概念：将具有相同条件但具有不同随机生成器初始化（实验定义中的随机种子）的单个实验分组的元实验。
-        seed参数：有AAAA、AAAAA、AAAAAA、seeeed
+        seed参数：字符串初始化随机数生成器.有AAAA、AAAAA、AAAAAA、seeeed
         machine参数：目前有edison和edison2015
         trace_type参数：有三个值。
             “single”：单个实验是对工作负载进行分析的一次运行。
@@ -53,7 +53,7 @@ class TestExperiment(unittest.TestCase):
             “manifest”：其中工作流作为单个作业提交，但使用了感知工作流的回填.即Woas提交
         subtraces: 本实验分析中应使用的迹线的trace_id （int）列表。只对delta和群实验有效。
         pre_load_time_s参数：表示在start_date之前生成的工作负载秒数。此工作负载用于“加载”调度器，但是分析将仅从“start_date”开始执行。
-        workload_duration_s参数：表示在start_date之后生成的工作负载秒数。
+        workload_duration_s参数：表示在start_date之后生成的工作负载秒数。工作负载在start_date+工作负载持续时间s时停止。
         overload_target: 如果设置为> 1.0，则在预加载期间生成的工作负载将产生额外的作业，
                 因此在一段时间内，将提交overload_target乘以系统的容量（在该期间产生的）。
     """
@@ -103,7 +103,7 @@ class TestExperiment(unittest.TestCase):
             manifest_list=[{"share": 0.0-1.0, "manifest": "floodplain.json"}],  # 这里的share是工作流占核心小时的份额，比如delta实验，一个设置0.8，一个设置0.2，两个实验的share之和为1.0
             workflow_policy="no/period/share",  # 一般在多个工作流的情况下设置为share
             workflow_period_s=5/20/60/300,      # 设置period时，要设置workflow_period_s，它表示按固定时间间隔提交工作流
-            workflow_share=30.0/0.0-100.0,       # 设置为share策略时进行配置，表示工作流中作业的占比
+            workflow_share=30.0/0.0-100.0,       # 表示工作流中作业的占比，和上面的共享提交工作流没有关系
             workflow_handling="single/multi/manifest",
             preload_time_s=0/20/3600,   # 预加载时间，包含在了工作流持续时间里面。有工作流时可以设置为0
             workload_duration_s=120/400/600/3600/3600*6,    # 定义工作流的持续时间

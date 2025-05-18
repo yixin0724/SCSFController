@@ -13,7 +13,9 @@ import random
 import string
 
 
-
+"""
+    获取histogram表中的bins和edges数据
+"""
 
 # ----------------------------直方图绘制函数----------------------------
 def plot_histogram(bins, edges,type):

@@ -136,7 +136,6 @@ def histogram_cdf(edges, hist, name, file_name, x_axis_label,
                   min_max=None,
                   cdf_min_max=None):
     """绘制直方图及其累积分布函数（CDF），并将图表保存为PNG文件
-
     所有输入的直方图必须具有相同的边界划分。支持对数坐标轴和自定义数值范围设置。
 
     Args:

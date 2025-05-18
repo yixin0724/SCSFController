@@ -1,0 +1,13 @@
+﻿workflow,policy,utilization,turnaround,slowdown,wasted_cores
+montage,pilot,28.43,595,1.33,33053
+montage,chained,15.39,994,2.51,0
+montage,woas,29.34,660,1.33,0
+cybershake,pilot,16.52,711.5,1.51,41527
+cybershake,chained,4.6,1031,2.35,0
+cybershake,woas,28.09,724,1.44,0
+synthLongWide,pilot,1,369,1.33,61948800
+synthLongWide,chained,23.62,368,1.33,0
+synthLongWide,woas,22.11,370,1.31,0
+sipht,pilot,12.1,735.5,1.72,3092929
+sipht,chained,10.31,1036,2.56,0
+sipht,woas,4.82,1138,1.71,0

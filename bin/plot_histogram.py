@@ -7,7 +7,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+"""
+    绘制histogram中记录数据的直方累积图
+"""
 def plot_histogram(bins, edges,type):
     # 数据校验
     if len(edges) - len(bins) != 1:
