@@ -33,7 +33,7 @@ class TestExperiment(unittest.TestCase):
     """
     实验的定义
         实验组的概念：将具有相同条件但具有不同随机生成器初始化（实验定义中的随机种子）的单个实验分组的元实验。
-        seed参数：字符串初始化随机数生成器.有AAAA、AAAAA、AAAAAA、seeeed
+        seed参数：字符串初始化随机数生成器.有AAAA、AAAAA、AAAAAA、seeeed。可以设置一个随机的5位哈希数
         machine参数：目前有edison和edison2015
         trace_type参数：有三个值。
             “single”：单个实验是对工作负载进行分析的一次运行。
