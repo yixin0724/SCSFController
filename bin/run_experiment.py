@@ -95,7 +95,7 @@ class TestExperiment(unittest.TestCase):
         db_obj = self._db
 
         # 创建一个实验定义对象，设置各种参数
-        # synthLongWide.json、synthWideLong.json、cybershake.json、montage.json、floodplain.json、sipht.json
+        # 所有工作流：synthLongWide.json、synthWideLong.json、cybershake.json、montage.json、floodplain.json、sipht.json
         exp = ExperimentDefinition(
             seed="AAAAA",
             machine="edison",
