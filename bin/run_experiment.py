@@ -96,6 +96,7 @@ class TestExperiment(unittest.TestCase):
 
         # 创建一个实验定义对象，设置各种参数
         # 所有工作流：synthLongWide.json、synthWideLong.json、cybershake.json、montage.json、floodplain.json、sipht.json
+        # 这里workflow_share参数暂时出了问题，实验数据影响不大
         exp = ExperimentDefinition(
             seed="AAAAA",
             machine="edison",
@@ -106,7 +107,7 @@ class TestExperiment(unittest.TestCase):
             workflow_share=30.0/0.0-100.0,       # 表示工作流中作业的占比，和上面的共享提交工作流没有关系
             workflow_handling="single/multi/manifest",
             preload_time_s=0/20/3600,   # 预加载时间，包含在了工作流持续时间里面。有工作流时可以设置为0
-            workload_duration_s=120/400/600/3600/3600*6,    # 定义工作流的持续时间
+            workload_duration_s=120/400/600/3600/3600*6,    # 定义工作流的持续时间，简单理解为实验的工作负载生成多长时间
             overload_target=1.0/1.1/1.2/2.0)            # 如果设置为> 1.0，则在预加载期间生成的工作负载将产生额外的作业，有工作流时可以设置为1.0
 
         # 将实验定义存储到数据库中
