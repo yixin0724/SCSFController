@@ -9,7 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# 读取数据
+# 读取数据源
 df = pd.read_csv('workflow_data.csv')
 
 # 设置绘图风格
